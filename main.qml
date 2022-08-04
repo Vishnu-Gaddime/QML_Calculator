@@ -16,11 +16,10 @@ Window {
     title: ""
     property int previousX
     property int previousY
-    property string anser: "0"
-    property string formula: ""
-    property color c1: "#ffffff"
-    property color c2: "#ffffff"
-    //property string ff:"Rounded Sans Serifs"
+    property string finalResult: "0"
+    property string textOnScreen: ""
+    property color c1: "#FFE4E1"
+    property color c2: "#F0FFFF"
     property string ff:"Helvetica Neue"
 
     Rectangle{
@@ -147,7 +146,7 @@ Window {
             width: 234
             height: 53
             color: "#000000"
-            text: anser
+            text: finalResult
 
             fontSizeMode: Text.Fit
             minimumPixelSize: 5
@@ -173,7 +172,7 @@ Window {
             width: 227
             height: 20
             color: "#99000000"
-            text: formula
+            text: textOnScreen
             maximumLength:27
             selectByMouse :true
             focus: true
@@ -189,7 +188,7 @@ Window {
 
         RoundButton {
             id: clear
-            x: 126
+            x: 8
             y: 104
             width: 57
             height: 47
@@ -202,8 +201,8 @@ Window {
             font.family: ff
             font.pointSize: 15
             onPressed:{
-                formula = ""
-                anser = "0"
+                textOnScreen = ""
+                finalResult = "0"
             }
             QtObject{
                 id:object3
@@ -232,7 +231,7 @@ Window {
             font.pointSize: 20
             font.family: ff
             onPressed:{
-
+                    textOnScreen = textOnScreen.slice(0, -1)
             }
             QtObject{
                 id:object4
@@ -250,8 +249,8 @@ Window {
 
         RoundButton {
             id: equal
-            x: 67
-            y: 104
+            x: 185
+            y: 300
             width: 57
             height: 47
             radius: 15
@@ -262,8 +261,8 @@ Window {
             QtObject{
                 id:object5
                 property string colorDefult :"#2f2f2f2f"
-                property var dynamicColor: if(rbrack){
-                                               rbrack.down ? "#f1f1f1f1":colorDefult
+                property var dynamicColor: if(equal){
+                                               equal.down ? "#f1f1f1f1":colorDefult
                                            }
             }
             background: Rectangle
@@ -278,7 +277,7 @@ Window {
 
         RoundButton {
             id: percentage
-            x: 8
+            x: 67
             y: 104
             width: 57
             height: 47
@@ -290,8 +289,8 @@ Window {
             QtObject{
                 id:object6
                 property string colorDefult :"#2f2f2f2f"
-                property var dynamicColor: if(lbrack){
-                                               lbrack.down ? "#f1f1f1f1":colorDefult
+                property var dynamicColor: if(percentage){
+                                               percentage.down ? "#f1f1f1f1":colorDefult
                                            }
             }
             background: Rectangle
@@ -300,14 +299,14 @@ Window {
                 color: object6.dynamicColor
             }
             onPressed:{
-
+                    textOnScreen = textOnScreen + text
             }
         }
 
         RoundButton {
             id: divide
-            x: 185
-            y: 153
+            x: 126
+            y: 104
             width: 57
             height: 47
             radius: 15
@@ -327,7 +326,7 @@ Window {
                 color: object7.dynamicColor
             }
             onPressed:{
-
+                    textOnScreen = textOnScreen+"/"
             }
         }
 
@@ -343,9 +342,9 @@ Window {
             font.pointSize: 20
             QtObject{
                 id:object8
-                property string colorDefult :"#0a0a0a0a"
+                property string colorDefult :  "#0a0a0a0a"
                 property var dynamicColor: if(nine){
-                                               nine.down ? "#f1f1f1f1":colorDefult
+                                               nine.down ? "#E6E6FA":colorDefult
                                            }
             }
             background: Rectangle
@@ -354,7 +353,7 @@ Window {
                 color: object8.dynamicColor
             }
             onPressed:{
-
+                    textOnScreen = textOnScreen + text
             }
         }
 
@@ -374,7 +373,7 @@ Window {
                 id:object9
                 property string colorDefult :"#0a0a0a0a"
                 property var dynamicColor: if(eight){
-                                               eight.down ? "#f1f1f1f1":colorDefult
+                                               eight.down ? "#E6E6FA":colorDefult
                                            }
             }
             background: Rectangle
@@ -383,7 +382,7 @@ Window {
                 color: object9.dynamicColor
             }
             onPressed:{
-
+                    textOnScreen = textOnScreen + text
             }
         }
 
@@ -401,7 +400,7 @@ Window {
                 id:object10
                 property string colorDefult :"#0a0a0a0a"
                 property var dynamicColor: if(seven){
-                                               seven.down ? "#f1f1f1f1":colorDefult
+                                               seven.down ? "#E6E6FA":colorDefult
                                            }
             }
             background: Rectangle
@@ -410,14 +409,14 @@ Window {
                 color: object10.dynamicColor
             }
             onPressed:{
-
+                    textOnScreen = textOnScreen + text
             }
         }
 
         RoundButton {
             id: multiply
             x: 185
-            y: 202
+            y: 153
             width: 57
             height: 47
             radius: 15
@@ -437,7 +436,7 @@ Window {
                 color: object11.dynamicColor
             }
             onPressed:{
-
+                    textOnScreen = textOnScreen + "*"
             }
         }
 
@@ -455,7 +454,7 @@ Window {
                 id:object12
                 property string colorDefult :"#0a0a0a0a"
                 property var dynamicColor: if(six){
-                                              six.down ? "#f1f1f1f1":colorDefult
+                                              six.down ? "#E6E6FA":colorDefult
                                            }
             }
             background: Rectangle
@@ -464,7 +463,251 @@ Window {
                 color: object12.dynamicColor
             }
             onPressed:{
+                    textOnScreen = textOnScreen + text
+            }
+        }
 
+        RoundButton {
+            id: five
+            x: 67
+            y: 202
+            width: 57
+            height: 47
+            radius: 15
+            text: "5"
+            font.family: ff
+            font.pointSize: 20
+            QtObject{
+                id:object13
+                property string colorDefult :"#0a0a0a0a"
+                property var dynamicColor: if(five){
+                                              five.down ? "#E6E6FA":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object13.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + text
+            }
+        }
+
+        RoundButton {
+            id: four
+            x: 8
+            y: 202
+            width: 57
+            height: 47
+            radius: 15
+            text: qsTr("4")
+            font.family: ff
+            font.pointSize: 20
+            QtObject{
+                id:object14
+                property string colorDefult :"#0a0a0a0a"
+                property var dynamicColor: if(four){
+                                              four.down ? "#E6E6FA":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object14.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + text
+            }
+        }
+
+        RoundButton {
+            id: minus
+            x: 185
+            y: 202
+            width: 57
+            height: 47
+            radius: 15
+            text: qsTr("—")
+            font.pointSize: 17
+            font.family: ff
+
+            QtObject{
+                id:object15
+                property string colorDefult :"#2f2f2f2f"
+                property var dynamicColor: if(minus){
+                                               minus.down ? "#f1f1f1f1":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object15.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + "-"
+            }
+        }
+
+        RoundButton {
+            id: three
+            x: 126
+            y: 251
+            width: 57
+            height: 47
+            radius: 15
+            text: qsTr("3")
+            font.family: ff
+            font.pointSize: 20
+            QtObject{
+                id:object16
+                property string colorDefult :"#0a0a0a0a"
+                property var dynamicColor: if(three){
+                                              three.down ? "#E6E6FA":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object16.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + text
+            }
+        }
+
+        RoundButton {
+            id: two
+            x: 67
+            y: 251
+            width: 57
+            height: 47
+            radius: 15
+            text: qsTr("2")
+            font.family: ff
+            font.pointSize: 20
+            QtObject{
+                id:object17
+                property string colorDefult :"#0a0a0a0a"
+                property var dynamicColor: if(two){
+                                              two.down ? "#E6E6FA":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object17.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + text
+            }
+        }
+
+        RoundButton {
+            id: one
+            x: 8
+            y: 251
+            width: 57
+            height: 47
+            radius: 15
+            text: qsTr("1")
+            font.family: ff
+            font.pointSize: 20
+            QtObject{
+                id:object18
+                property string colorDefult :"#0a0a0a0a"
+                property var dynamicColor: if(one){
+                                              one.down ? "#E6E6FA":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object18.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + text
+            }
+        }
+
+        RoundButton {
+            id: plus
+            x: 185
+            y: 251
+            width: 57
+            height: 47
+            radius: 15
+            text: qsTr("+")
+            font.pointSize: 22
+            font.family: ff
+            QtObject{
+                id:object19
+                property string colorDefult :"#1f1f1f1f"
+                property var dynamicColor: if(plus){
+                                              plus.down ? "#f1f1f1f1":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object19.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + "+"
+            }
+        }
+
+        RoundButton {
+            id: decimal
+            x: 126
+            y: 300
+            width: 57
+            height: 47
+            radius: 15
+            text: qsTr(".")
+            font.family: ff
+            font.pointSize: 30
+            QtObject{
+                id:object20
+                property string colorDefult :"#0a0a0a0a"
+                property var dynamicColor: if(decimal){
+                                              decimal.down ? "#f1f1f1f1":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object20.dynamicColor
+            }
+            onPressed:{
+                    textOnScreen = textOnScreen + text
+            }
+        }
+
+        RoundButton {
+            id: zero
+            x: 8
+            y: 300
+            width: 116
+            height: 47
+            radius: 15
+            text: qsTr("0")
+            font.family: ff
+            font.pointSize: 20
+            QtObject{
+                id:object21
+                property string colorDefult :"#0a0a0a0a"
+                property var dynamicColor: if(zero){
+                                              zero.down ? "#E6E6FA":colorDefult
+                                           }
+            }
+            background: Rectangle
+            {
+                radius: 15
+                color: object21.dynamicColor
+            }
+            onPressed:{
+                  textOnScreen = textOnScreen + text
             }
         }
 
