@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import Calculator 1.0
 
 Window {
     id: mainWindow
@@ -21,6 +22,10 @@ Window {
     property color c1: "#FFE4E1"
     property color c2: "#F0FFFF"
     property string ff:"Helvetica Neue"
+
+    Calculator{
+        id: logic
+    }
 
     Rectangle{
         radius: 40
@@ -48,6 +53,7 @@ Window {
             }
         }
     }
+
 
     Rectangle {
         id: maini
@@ -120,7 +126,6 @@ Window {
             flat: false
             font.family: ff
             focusPolicy: Qt.ClickFocus
-            //spacing: 9
             highlighted: false
             layer.enabled: false
             onClicked:Qt.quit()
@@ -155,14 +160,12 @@ Window {
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
             wrapMode: Text.WordWrap
-            //font.styleName: "Bold"
             font.family: ff
             Rectangle {
                 id: screen1
                 x: 99
                 y: 22
             }
-
         }
 
         TextInput {
@@ -227,7 +230,6 @@ Window {
             height: 47
             radius: 15
             text: qsTr("⌫")
-            //font.bold: true
             font.pointSize: 20
             font.family: ff
             onPressed:{
@@ -255,7 +257,6 @@ Window {
             height: 47
             radius: 15
             text: qsTr("=")
-            //font.bold: true
             font.family: ff
             font.pointSize: 17
             QtObject{
@@ -271,7 +272,11 @@ Window {
                 color: object5.dynamicColor
             }
             onClicked: {
-
+                finalResult = logic.result(textOnScreen)
+                if(textOnScreen == "")
+                {
+                    finalResult = "0"
+                }
             }
         }
 
@@ -283,7 +288,6 @@ Window {
             height: 47
             radius: 15
             text: qsTr("%")
-            //font.bold: true
             font.family: ff
             font.pointSize: 17
             QtObject{

@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         qml.qrc
         calculator.cpp
         calculator.h
+        evalExpression.cpp
+        evalExpression.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
