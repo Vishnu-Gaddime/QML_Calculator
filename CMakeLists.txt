@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
         calculator.h
         evalExpression.cpp
         evalExpression.h
+        catch.hpp
+        test.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
