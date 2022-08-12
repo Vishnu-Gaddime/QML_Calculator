@@ -1,6 +1,9 @@
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "calculator.h"
+#define UNIT_TEST_ENABLED
 
 
 int main(int argc, char *argv[])
@@ -19,6 +22,7 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+    Catch::Session().run(argc,argv);
 
     return app.exec();
 }

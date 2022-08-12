@@ -13,7 +13,6 @@ signals:
 
 public slots:
     QString result(QString expression);
-
 };
 
 #endif // CALCULATOR_H

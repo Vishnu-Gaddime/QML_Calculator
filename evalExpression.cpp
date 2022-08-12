@@ -167,3 +167,17 @@ double EvaluateExpression(string exp) {
     cout <<"final answer" <<Operand.back() << endl;
     return Operand.back();
 }
+
+double percentage(string exp)
+{
+    if(exp.back() == '%')
+    {
+        exp.erase(exp.end());
+        return std::stod(exp) * 0.01;
+    }
+    else
+    {
+        exp.erase(exp.begin(),exp.end());
+        return 0;
+    }
+}

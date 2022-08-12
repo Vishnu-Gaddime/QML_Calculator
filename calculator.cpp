@@ -13,7 +13,7 @@ QString Calculator::result(QString expression)
 {
     expression.remove("=");
     std::string stackString = expression.toStdString();
-    if (expression != "")
+    if (expression != "" && !expression.contains("%"))
     {
         std::ostringstream oss;
         oss << std::setprecision(8) << std::noshowpoint << EvaluateExpression(stackString);
@@ -22,7 +22,18 @@ QString Calculator::result(QString expression)
         std::cout << str << std::endl;
         return QString::fromStdString(str);
     }
+    else if (expression.contains("%") && expression != "")
+    {
+        std::ostringstream oss;
+        oss << std::setprecision(8) << std::noshowpoint << percentage(stackString);
+        std::string str = oss.str();
+
+        std::cout << str << std::endl;
+        return QString::fromStdString(str);
+
+    }
     else {
         return QString::fromStdString("");
     }
 }
+
